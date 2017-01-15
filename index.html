@@ -1,25 +1,8 @@
 <html>
   <head>
     <title> ' -')</title>
-    <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
-  <article  id="main">
-    <header>
-      <h2>{{ title }}</h2>
-    </header>
-    <section>
-      <div>
-        <input type="text" v-model="input" v-on:keypress.enter="addCard"/>
-        <button v-on:click="addCard">Add Card</button>
-      </div>
-    </section>
-    <section>
-      <card-list v-bind:cards="cards"></card-list>
-    </section>
-  </article>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="/js/main.js" ></script>
+    <article id="app"></article>
   </body>
 </html>
