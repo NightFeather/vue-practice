@@ -5,7 +5,13 @@
     </header>
     <section>
       <div>
-        <input type="text" v-model="input" v-on:keypress.enter="addCard"/>
+        <input type="text" v-model="input.title"/>
+        <select v-model="input.type">
+          <option value="url">Url</option>
+          <option value="text">Text</option>
+        </select>
+        <input v-if="input.type === 'url'" type="text" v-model="input.url" placeholder="url here" />
+        <input v-if="input.type === 'text'" type="text" v-model="input.content" placeholder="text here" />
         <button v-on:click="addCard">Add Card</button>
       </div>
     </section>
@@ -13,6 +19,9 @@
       <card-list v-bind:cards="cards" v-bind:currentBoard="currentBoard"></card-list>
     </section>
     <hr />
+    <section>
+      <i class="fa fa-comment" aria-hidden="true"></i>
+    </section>
   </article>
 </template>
 
@@ -29,15 +38,21 @@ export default {
     return {
       title: ' \' -\')',
       currentBoard: 'testboard',
-      input: '',
+      input: { title: '', type: 'url', url: '', content: '' },
       cards: DefaultList
     }
   },
   methods: {
     addCard: function () {
-      if (this.input === '') { return }
-      this.cards.push({ text: this.input })
-      this.input = ''
+      if (this.input.title === '') { return }
+      if (this.input.type === 'url' && this.input.url !== '') {
+        delete this.input.content
+        this.cards.push(this.input)
+      } else if (this.input.type === 'text' && this.input.content !== '') {
+        delete this.input.url
+        this.cards.push(this.input)
+      }
+      this.input = { title: '', type: 'url', url: '', content: '' }
     }
   }
 }
