@@ -1,7 +1,7 @@
 <template>
   <li class="card">
     <card-vote v-bind:card="card"></card-vote>
-    <div class="thumbnail"><img v-bind:src="imageSrc(card)" alt=""></div>
+    <card-thumb v-bind:card="card"></card-thumb>
     <card-detail v-bind:card="card"></card-detail>
   </li>
 </template>
@@ -9,35 +9,15 @@
 <script>
   import Vote from './Card/Vote'
   import Detail from './Card/Detail'
+  import Thumbnail from './Card/Thumbnail'
 
   export default {
     name: 'card',
     props: ['currentBoard', 'card', 'index'],
     components: {
       'card-vote': Vote,
-      'card-detail': Detail
-    },
-    methods: {
-      imageSrc: function (card) {
-        var url = card.url
-        if (url === undefined || url === '') {
-          return '/static/images/discussion.png'
-        } else if (['jpg', 'jpeg', 'png', 'gif'].some(function (v) { return url.endsWith(v) })) {
-          return url
-        } else {
-          return '/static/images/document.png'
-        }
-      }
-    },
-    computed: {
-      computedClass: function () {
-        var classList = []
-        classList.push('card')
-        if (this.card.state && this.card.state !== '') {
-          classList.push(this.card.state + 'd')
-        }
-        return classList.join(' ')
-      }
+      'card-detail': Detail,
+      'card-thumb': Thumbnail
     }
   }
 </script>
@@ -51,7 +31,7 @@
   padding: 2px;
   margin-bottom: 1em;
 
-  font-size: 20px;
+  font-size: 15px;
   line-height: 25px;
 
   &:last-child { margin-bottom: inherit; }
@@ -73,17 +53,6 @@
     &:first-child {
       display: inline-block;
       margin-left: 1em;
-    }
-  }
-
-  .thumbnail, .detail { min-width: 100px; }
-
-  .thumbnail{
-    img {
-      display: block;
-      height: 100px;
-      margin: auto;
-      vertical-align: middle;
     }
   }
 

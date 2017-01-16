@@ -57,7 +57,8 @@
     * {
       display: block;
       height: 1.5em;
-      width: 1em;
+      width: 2em;
+      text-align: center;
     }
 
     .upvote, .downvote {

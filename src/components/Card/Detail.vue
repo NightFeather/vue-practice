@@ -1,9 +1,10 @@
 <template>
   <div class="detail">
     <div class="title">
-      {{card.title ? card.title : "No Title" }}
-      <a class="refer" target="_blank" v-if="card.url" v-bind:href="card.url">({{ card.url }})</a>
-      <span class="refer" v-else>(self.{{ $parent.currentBoard }})</span>
+      {{card.title}}
+      <a class="refer" target="_blank" v-bind:href="referLink">
+        ({{ card.url ? card.url : "self." + $parent.currentBoard }})
+      </a>
     </div>
     <div class="author">
       posted by <a :href="authorLink">{{ card.author }}</a>
@@ -11,10 +12,10 @@
     <div class="actions">
       <ul>
         <li><a href="">XXX</a></li>
-        <li><a href="">XXX</a></li>
-        <li><a href="">XXX</a></li>
-        <li><a href="">XXX</a></li>
-        <li><a href="">XXX</a></li>
+        <li><a href="">YYY</a></li>
+        <li><a href="">ZZZ</a></li>
+        <li><a href="">AAA</a></li>
+        <li><a href="">BBB</a></li>
       </ul>
     </div>
   </div>
@@ -27,6 +28,13 @@
     computed: {
       authorLink: function () {
         return '/u/' + this.card.author
+      },
+      referLink: function () {
+        if (this.card.type === 'url') {
+          return this.card.url
+        } else {
+          return '/r/' + this.$parent.currentBoard
+        }
       }
     }
   }
@@ -34,23 +42,27 @@
 
 <style lang="scss">
   .detail {
+
+    min-width: 100px;
+    vertical-align: top;
+
     & > * {
       display: block;
       min-width: 100px;
-      font-size: 15px;
+      font-size: 12px;
     }
     .title {
-      height: 1.5em;
-      font-size: 18px;
+      height: 1.2em;
+      font-size: 20px;
 
       .refer {
-        font-size: 15px;
+        font-size: 12px;
         color: #aaa;
       }
     }
     .author {
       color: #777;
-      height: 1.5em;
+      height: 2.5em;
     }
 
     .actions {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
+import 'font-awesome-webpack'
 
 Vue.use(VueRouter)
 

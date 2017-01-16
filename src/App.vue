@@ -18,10 +18,6 @@
     <section>
       <card-list v-bind:cards="cards" v-bind:currentBoard="currentBoard"></card-list>
     </section>
-    <hr />
-    <section>
-      <i class="fa fa-comment" aria-hidden="true"></i>
-    </section>
   </article>
 </template>
 
