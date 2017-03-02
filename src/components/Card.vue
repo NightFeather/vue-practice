@@ -36,7 +36,7 @@
 
   &:last-child { margin-bottom: inherit; }
 
-  &:before {
+  &::before {
     content: '';
     display: inline-block;
     vertical-align: middle;

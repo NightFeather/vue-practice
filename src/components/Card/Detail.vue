@@ -1,9 +1,9 @@
 <template>
   <div class="detail">
     <div class="title">
-      {{card.title}}
-      <a class="refer" target="_blank" v-bind:href="referLink">
-        ({{ card.url ? card.url : "self." + $parent.currentBoard }})
+      <a class="link" :href="referLink">{{card.title}}</a>
+      <a class="domain" target="_blank" v-bind:href="referLink">
+        ({{ (card.url ? card.url : "self." + $parent.currentBoard) | domain }})
       </a>
     </div>
     <div class="author">
@@ -22,9 +22,12 @@
 </template>
 
 <script>
+  import LinkHelper from '@/mixins/link-helpers'
+
   export default {
     name: 'card-detail',
     props: ['card'],
+    mixins: [LinkHelper],
     computed: {
       authorLink: function () {
         return '/u/' + this.card.author
@@ -55,7 +58,8 @@
       height: 1.2em;
       font-size: 20px;
 
-      .refer {
+      .link { color: black; }
+      .domain {
         font-size: 12px;
         color: #aaa;
       }

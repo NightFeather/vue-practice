@@ -1,7 +1,9 @@
 <template>
-  <div class="thumbnail" v-bind:class="thumbnailType">
-    <img v-show="thumbnailType == 'image'" v-bind:src="imageSrc(card)" alt="">
-  </div>
+  <a :href="card.url">
+    <div class="thumbnail" v-bind:class="thumbnailType">
+      <img v-if="thumbnailType == 'image'" v-bind:src="imageSrc(card)" alt="">
+    </div>
+  </a>
 </template>
 
 <script>
@@ -11,12 +13,11 @@
     methods: {
       imageSrc: function (card) {
         var url = card.url
-        if (url === undefined || url === '') {
-          return '/static/images/discussion.png'
-        } else if (['jpg', 'jpeg', 'png', 'gif'].some(function (v) { return url.endsWith(v) })) {
+        if (url === undefined) { return '' }
+        if (['jpg', 'jpeg', 'png', 'gif'].some(function (v) { return url.endsWith('.' + v) })) {
           return url
         } else {
-          return '/static/images/document.png'
+          return ''
         }
       }
     },
